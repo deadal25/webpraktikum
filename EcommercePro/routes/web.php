@@ -138,5 +138,15 @@ Route::get('/productnya', [TokoController::class, 'productnya']);
 
 Route::get('/product_searchtoko', [TokoController::class, 'product_searchtoko']);
 
+Route::post('/add_carttoko/{id}', [TokoController::class, 'add_carttoko']);
+
+Route::get('/showtokoadmin', [AdminController::class, 'showtokoadmin']);
+
+Route::get('/update_tokoadmin/{id}', [AdminController::class, 'update_tokoadmin']);
+
+Route::post('/update_toko_confirm/{id}', [AdminController::class, 'update_toko_confirm']);
+
+Route::get('/deletetokoadmin/{id}', [AdminController::class, 'deletetokoadmin']);
+
 
 

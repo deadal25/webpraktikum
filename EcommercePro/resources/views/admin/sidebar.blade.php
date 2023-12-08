@@ -107,14 +107,14 @@
           <span class="menu-title">User</span>
         </a>
       </li>
-      {{-- <li class="nav-item menu-items">
-        <a class="nav-link" href="pages/charts/chartjs.html">
+      <li class="nav-item menu-items">
+        <a class="nav-link" href="{{ 'showtokoadmin' }}">
           <span class="menu-icon">
             <i class="mdi mdi-chart-bar"></i>
           </span>
-          <span class="menu-title">Charts</span>
+          <span class="menu-title">Toko</span>
         </a>
-      </li> --}}
+      </li>
       {{-- <li class="nav-item menu-items">
         <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
           <span class="menu-icon">

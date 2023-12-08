@@ -12,7 +12,7 @@
       <meta name="description" content="" />
       <meta name="author" content="" />
       <link rel="shortcut icon" href="images/favicon.png" type="">
-      <title>ISEKAI STORE</title>
+      <title>ISEKAI THRIFT</title>
       <!-- bootstrap core css -->
       <link rel="stylesheet" type="text/css" href="home/css/bootstrap.css" />
       <!-- font awesome style -->
@@ -72,26 +72,24 @@
                     <h6 style="color: red">
                         Harga Diskon
                         <br>
-                        {{ $product->discount_price }}
+                        Rp.{{ $product->discount_price }}
                     </h6>
                     <h6 style="text-decoration: line-through; color:blue;">
                         Harga
                         <br>
-                        {{ $product->price }}
+                        Rp.{{ $product->price }}
                     </h6>
                 @else
                     <h6 style="color:blue">
                         Harga
                         <br>
-                        {{ $product->price }}
+                        Rp.{{ $product->price }}
                     </h6>
                 @endif
         
                 <h6>Kategori Produk: {{ $product->category }}</h6>
                 <h6>Detail Produk: {{ $product->description }}</h6>
                 <h6>Jumlah Tersedia: {{ $product->quantity }}</h6>
-
-
             </div>
             <div class="container">
                 <div class="row">
@@ -112,8 +110,8 @@
                         <!-- Form untuk menambahkan ke Favorite -->
                         <form action="{{ url('add_fav', $product->id) }}" method="POST" class="cart-form">
                             @csrf
-
-                                <div class="">
+                            
+                            <div class="">
                                 <input type="submit" name="action" value="add to favorite" class="btn-favorite">
                             </div>
                         </form>
@@ -121,18 +119,35 @@
                 </div>
             </div>
             
-            <h6>Nama Toko: {{ $store->nama_store }}</h6>
-
         </div>
+        
+        <div class="container w-50">
+            <div class="card mb-3">
+                <div class="row">
+                  <div class="col-md-2 d-flex justify-content-center align-items-center">
+                    <img width="200px" src="store/{{ $store->image_store }}" class="img-fluid rounded-start" >
+                  </div>
+                  <div class="col-md-4">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ $store->nama_store }}</h5>
+                      <p class="card-text">Deskripsi:
+                        <br>{{ $store->description_store }}</p>
+                      {{-- <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p> --}}
+                    </div>
+                  </div>
+                </div>
+            </div>            
+        </div>
+        {{-- @include('home.product') --}}
         
       
       <!-- footer start -->
       {{-- @include('home.footer') --}}
       <!-- footer end -->
       <div class="cpy_">
-        <p class="mx-auto">© 2023 All Rights Reserved By Free Html Templates
+        <p class="mx-auto">© 2023 All Rights Reserved By Al Qadri
         
-           Distributed By AL QADRI
+           Distributed By Al Qadri
         
         </p>
      </div>

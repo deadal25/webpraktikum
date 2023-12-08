@@ -268,6 +268,7 @@ class AdminController extends Controller
         return view('admin.showuser', compact('data'));
     
     }
+    // showtoko
     public function update_user($id){
 
         $data =user::find($id);
@@ -321,4 +322,90 @@ class AdminController extends Controller
         // return view('admin.deleteproduct',compact('data'));
 
     }
+    public function showtokoadmin(){
+        $data =store::all();
+        
+        
+        return view('admin.showtokoadmin', compact('data'));
+    
+    }
+    public function update_tokoadmin($id){
+
+        $data =store::find($id);
+        // $category=category::all();
+        // $store = store::find($id);
+
+
+        // $data =product::all();
+
+        return view('admin.update_tokoadmin',compact('data'));
+
+    }
+    public function update_toko_confirm(Request $request , $id){
+
+        $data =store::find($id);
+        // $category=category::all();
+        // $store=store::find($id);
+
+        // $data=new product;
+       
+        
+        $data->nama_store=$request->nama_store;
+        
+        $data->description_store=$request->description_store;
+        
+        $data->address=$request->address;
+        
+        $data->phone=$request->phone;
+
+        $image_store=$request->image_store;
+        
+        if($image_store){
+
+            $imagename=time().'.'.$image_store->getClientOriginalExtension();
+        
+            $request->image_store->move('store', $imagename);
+            
+            $data->image_store=$imagename;
+        
+        }
+
+
+        $data->save();
+        
+        // return redirect()->back()->with('message','Product Updated Successfully');
+        return redirect()->back()->with('message', 'User Updated Successfully');
+        
+        
+        // $data =product::all();
+        
+        // return view('admin.updateview',compact('data'));
+        
+    }
+    // public function deletetokoadmin($id){
+
+    //     $data =store::find($id);
+        
+
+    //     $data->delete();
+
+    //     // return redirect()->back()->with('message','Product Deleted Successfully');;
+    //     return redirect()->back()->with('message', 'User Deleted Successfully');
+
+    //     // return view('admin.deleteproduct',compact('data'));
+
+    // }
+    public function deletetokoadmin($id)
+{
+    $store = Store::find($id);
+
+    // Hapus terlebih dahulu produk yang terkait dengan toko ini
+    $store->products()->delete();
+
+    // Kemudian baru hapus toko
+    $store->delete();
+
+    return redirect()->back()->with('message', 'User Deleted Successfully');
+}
+
 }

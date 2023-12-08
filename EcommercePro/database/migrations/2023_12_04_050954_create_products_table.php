@@ -21,7 +21,8 @@ return new class extends Migration
             $table->string('price')->nullable();
             $table->string('discount_price')->nullable();
             // $table->string('store_id')->nullable();
-            $table->foreignId('store_id')->constrained('stores')->nullable();
+            // $table->foreignId('store_id')->constrained('stores')->nullable();
+            $table->foreignId('store_id')->constrained('stores')->onDelete('cascade');
             $table->timestamps();
         });
     }

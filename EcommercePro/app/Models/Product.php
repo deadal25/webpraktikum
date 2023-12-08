@@ -14,6 +14,14 @@ public function store()
 {
     return $this->belongsTo(Store::class);
 }
+// Di dalam model Product
+// Di dalam model Product
+public function cart()
+{
+    return $this->belongsTo(Cart::class, 'cart_id');
+}
+
+
 
 
 }

@@ -82,7 +82,7 @@
      <span style="padding-top: 10px; ">
         
      </span>
-     {{-- {!!$product->withQueryString()->links('pagination::bootstrap-5')!!} --}}
+     {!!$product->withQueryString()->links('pagination::bootstrap-5')!!}
     </div>
     
         

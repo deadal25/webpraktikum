@@ -388,6 +388,7 @@ class TokoController extends Controller
     }
     public function showtoko(Request $request){
         
+        // $data= store::find($id);
         $data= store::where('nama_store', '!=', null)->get();
         
         return view('toko.showtoko', compact('data'));
@@ -543,8 +544,12 @@ public function productdetails(Request $request, $id)
 
     $store = DB::table('products')
         ->join('stores', 'products.store_id', '=', 'stores.id')
+        ->where('stores.id', '=', $product->store_id)
         ->select('stores.nama_store','stores.image_store', 'stores.description_store')
         ->first();
+    // $store = store::where('')->first();
+        // ->all();
+        // ->second();
 
     // Mengembalikan tampilan dengan data produk dan data toko
     return view('toko.productdetails', compact('product', 'store'));
@@ -593,6 +598,46 @@ public function product_searchtoko(Request $request){
     $product=product::where('title','LIKE',"%$search_text%")->orWhere('category','LIKE',"%$search_text%")->paginate(3);
 
     return view('toko.halamantoko',compact('product'));
+}
+public function add_carttoko(Request $request, $id){
+    if(Auth::id()){
+        // return redirect()->back();
+        
+        $user=Auth::user();
+        $products=product::find($id);
+        $cart= new cart;
+        $cart->name=$user->name;
+        $cart->email=$user->email;
+        $cart->phone=$user->phone;
+        $cart->address=$user->address;
+        $cart->user_id=$user->id;
+        $cart->product_title=$products->title;
+        if($products->discount_price!=null){
+            $cart->price=$products->discount_price * $request->quantity;
+        }
+        else{
+            $cart->price=$products->price * $request->quantity;
+        }
+        $cart->image=$products->image;
+        $cart->product_id=$products->id;
+        $cart->quantity=$request->quantity;
+        switch ($request->input('action')) {
+            case 'cart':
+                $cart->save();
+                break;
+
+            // Tambahkan tindakan lain jika diperlukan
+
+            default:
+                // Tindakan default jika tidak ada tindakan yang sesuai
+        }
+        $cart->save();
+        return redirect()->back();
+    }
+    
+    else{
+        return redirect('login');
+    }
 }
     
     

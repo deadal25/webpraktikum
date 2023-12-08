@@ -53,7 +53,7 @@
                         <th>Price</th>
                         <th>Payment Status</th>
                         <th>Delivery Status</th>
-                        <th>Image</th>
+                        <th >Image</th>
                         <th>Status</th>
                         {{-- <th>Remove</th> --}}
                     </tr>

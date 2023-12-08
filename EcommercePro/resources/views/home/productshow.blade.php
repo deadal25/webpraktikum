@@ -61,11 +61,11 @@ form {
             
             <div>
                 
-            <form action="{{ url('product_search') }}" method="GET">
+            <form action="{{ url('product_searchtoko') }}" method="GET">
                 @csrf
                <input style="width: 500px;" type="text" name="search" placeholder="Search for Ssomething">
                <input type="submit" value="Search">
-
+    
             </form>
           </div>
           
@@ -77,7 +77,7 @@ form {
                 <div class="box">
                     <div class="option_container">
                         <div class="options">
-                            <a href="{{ url('product_details',$products->id) }}" class="option1">
+                            <a href="{{ url('productdetails',$products->id) }}" class="option1">
                         Product Details
                     </a>
                     {{-- <a href="{{ }}" class="option2">
@@ -104,7 +104,7 @@ form {
                   <h5>
                       {{ $products->title }}
                   </h5>
-
+    
                   @if($products->discount_price!=null)
                   
                   <h6 style="color: red">
@@ -134,7 +134,7 @@ form {
          <span style="padding-top: 10px; ">
             
          </span>
-         {{-- {!!$product->withQueryString()->links('pagination::bootstrap-5')!!} --}}
+         {!!$product->withQueryString()->links('pagination::bootstrap-5')!!}
         </div>
         
             

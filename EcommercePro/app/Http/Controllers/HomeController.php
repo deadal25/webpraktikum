@@ -81,10 +81,9 @@ public function product_details(Request $request, $id)
     $product = product::find($id);
 
     $store = DB::table('products')
-        ->join('stores', 'products.store_id', '=', 'stores.id')
-        ->select('stores.nama_store')
-        ->first();
-
+    ->join('stores', 'products.store_id', '=', 'stores.id')
+    ->select('stores.nama_store','stores.image_store', 'stores.description_store')
+    ->first();
     // Mengembalikan tampilan dengan data produk dan data toko
     return view('home.product_details', compact('product', 'store'));
 }
@@ -179,16 +178,16 @@ public function add_cart(Request $request, $id){
        
     }
     // HomeController atau controller lainnya
-public function calculateTotalPrice($price, $quantity) {
-    return $price * $quantity;
-}
+        public function calculateTotalPrice($price, $quantity) {
+        return $price * $quantity;
+    }   
 
 public function update_cart(Request $request, $id) {
     // Find the cart item with the associated product loaded
-    $cart = Cart::with('product')->find($id);
+    $cart = Cart::with('products')->find($id);
 
     // Validasi jika produk tidak ditemukan pada cart, mungkin karena data yang tidak valid
-    if (!$cart || !$cart->product) {
+    if (!$cart || !$cart->product_id) {
         return redirect()->back()->with('error', 'Invalid cart data');
     }
 
@@ -205,11 +204,13 @@ public function update_cart(Request $request, $id) {
     $cart->quantity = $request->quantity;
 
     // Access the associated product through the loaded relationship
-    $product = $cart->product;
+    $product = Product::where('id', $cart->product_id)->first();
 
     // Hitung total harga berdasarkan quantity yang baru
-    $newTotalPrice = $product->discount_price ?? $product->price;
+    $newTotalPrice = $product->discount_price ? $product->discount_price : $product->price;
     $newTotalPrice *= $request->quantity;
+    // Hitung total harga berdasarkan quantity yang baru
+    // $newTotalPrice = ($product->discount_price ?? $product->price) * $request->quantity;
 
     // Simpan total harga yang baru ke dalam database
     $cart->price = $newTotalPrice;
