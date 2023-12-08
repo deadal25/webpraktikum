@@ -48,6 +48,89 @@ class AdminController extends Controller
 
         return view('admin.product', compact('category'));
     }
+    // public function add_product(Request $request){
+    //     $product = new Product;
+    //     $store = new Store;
+    
+    //     // Set product details
+    //     $product->title = $request->title;
+    //     $product->description = $request->description;
+    //     $product->price = $request->price;
+    //     $product->quantity = $request->quantity;
+    //     $product->discount_price = $request->discount_price;
+    //     $product->category = $request->category;
+    
+    //     // Set store details
+    //     $store->image_store = $request->image_store;
+    
+    //     // Validate if 'nama_store' is provided
+    //     if (!empty($request->nama_store)) {
+    //         $store->nama_store = $request->nama_store;
+    //     } else {
+    //         // Handle the case where 'nama_store' is empty or null
+    //         return redirect()->back()->with('error', 'Nama Store cannot be empty')->withInput();
+    //     }
+    
+    //     $store->description_store = $request->description_store;
+    //     $store->address = $request->address;
+    //     $store->phone = $request->phone;
+    
+    //     // Save the store first to get the store_id
+    //     $store->save();
+    
+    //     // Set the store_id for the product
+    //     $product->store_id = $store->id;
+    
+    //     // Handle image upload
+    //     $image = $request->image;
+    //     $imagename = time() . '.' . $image->getClientOriginalExtension();
+    //     $request->image->move('product', $imagename);
+    //     $product->image = $imagename;
+    
+    //     // Save the product
+    //     $product->save();
+    
+    //     return redirect()->back()->with('message', 'Product Added Successfully');
+    // }
+    
+    // public function add_product(Request $request){
+    //     $product = new Product;
+    //     $store = new Store;
+    
+    //     // Set product details
+    //     $product->title = $request->title;
+    //     $product->description = $request->description;
+    //     $product->price = $request->price;
+    //     $product->quantity = $request->quantity;
+    //     $product->discount_price = $request->discount_price;
+    //     $product->category = $request->category;
+    
+    //     // Set store details
+    //     $store->image_store=$request->image_store;
+    //     $store->nama_store = $request->nama_store;
+    //     $store->description_store = $request->description_store;
+    //     $store->address=$request->address;
+    //     $store->phone=$request->phone;
+
+    
+    //     // Save the store first to get the store_id
+    //     $store->save();
+    
+    //     // Set the store_id for the product
+    //     $product->store_id = $store->id;
+    
+    //     // Handle image upload
+    //     $image = $request->image;
+    //     $imagename = time() . '.' . $image->getClientOriginalExtension();
+    //     $request->image->move('product', $imagename);
+    //     $product->image = $imagename;
+    
+    //     // Save the product
+    //     $product->save();
+    
+    //     return redirect()->back()->with('message', 'Product Added Successfully');
+    // }
+    
     public function add_product(Request $request){
         $product = new product;
         $store = new store;
@@ -57,6 +140,7 @@ class AdminController extends Controller
         $product->quantity=$request->quantity;
         $product->discount_price=$request->discount_price;
         $product->category=$request->category;
+        $product->store_id=$request->store_id;
         $store->nama_store=$request->nama_store;
         $store->description_store=$request->description_store;
 
@@ -90,7 +174,7 @@ class AdminController extends Controller
         
         return view('admin.show_product', compact('data'));
     }
-    public function update_product($id){
+    public function update_productadmin($id){
 
         $data =product::find($id);
         $category=category::all();
@@ -102,7 +186,7 @@ class AdminController extends Controller
         return view('admin.update_product',compact('data','category','store'));
 
     }
-    public function deleteproduct($id){
+    public function deleteproducttoko($id){
 
         $data =product::find($id);
 
@@ -134,6 +218,7 @@ class AdminController extends Controller
         $data->description=$request->description;
         
         $data->quantity=$request->quantity;
+        $data->store_id=$request->store_id;
         
         $image=$request->image;
         

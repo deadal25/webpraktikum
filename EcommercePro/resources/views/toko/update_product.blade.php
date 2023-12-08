@@ -9,7 +9,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <link rel="shortcut icon" href="images/favicon.png" type="">
-    <title>Famms - Fashion HTML Template</title>
+    <title>ISEKAI STORE</title>
     <link rel="stylesheet" type="text/css" href="home/css/bootstrap.css" />
     <link href="home/css/font-awesome.min.css" rel="stylesheet" />
     <link href="home/css/style.css" rel="stylesheet" />
@@ -97,6 +97,10 @@
                         <input class="form-control" type="number" min="0" name="quantity" placeholder="Write a Quantity" required="" value="{{ $data->quantity }}">
                     </div>
                     <div class="div_design">
+                        <label for="store_id" >ID toko</label>
+                        <input class="text_color" type="number" min="0" name="store_id" placeholder="Write a store" required="" value="{{ $data->store_id }}">
+                    </div>
+                    <div class="div_design">
                         <label for="category" class="text_color">Category</label>
                         <select class="form-control" style="color: black;" name="category" required="">
                             <option value="{{ $data->category }}" selected=''>{{ $data->category }}</option>
@@ -132,9 +136,9 @@
         </div>
     </div>
     <div class="cpy_">
-        <p class="mx-auto">© 2021 All Rights Reserved By <a href="https://html.design/">Free Html Templates</a><br>
+        <p class="mx-auto">© 2023 All Rights Reserved By Free Html Templates
         
-           Distributed By <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
+           Distributed By AL QADRI
         
         </p>
      </div>

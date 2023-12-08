@@ -9,7 +9,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <link rel="shortcut icon" href="images/favicon.png" type="">
-    <title>Famms - Fashion HTML Template</title>
+    <title>ISEKAI STORE</title>
     <link rel="stylesheet" type="text/css" href="home/css/bootstrap.css" />
     <link href="home/css/font-awesome.min.css" rel="stylesheet" />
     <link href="home/css/style.css" rel="stylesheet" />
@@ -47,6 +47,7 @@ form {
     </style>
 </head>
 <body>
+    
     @include('toko.header')
    
     
@@ -61,7 +62,7 @@ form {
             
             <div>
                 
-            <form action="{{ url('product_search') }}" method="GET">
+            <form action="{{ url('product_searchtoko') }}" method="GET">
                 @csrf
                <input style="width: 500px;" type="text" name="search" placeholder="Search for Ssomething">
                <input type="submit" value="Search">
@@ -139,13 +140,13 @@ form {
         
             
     </section>
-            <div class="cpy_">
-                <p class="mx-auto">© 2021 All Rights Reserved By <a href="https://html.design/">Free Html Templates</a><br>
-                
-                   Distributed By <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
-                
-                </p>
-             </div>
+    <div class="cpy_">
+        <p class="mx-auto">© 2023 All Rights Reserved By Free Html Templates
+        
+           Distributed By AL QADRI
+        
+        </p>
+     </div>
             
         
             <script src="home/js/jquery-3.4.1.min.js"></script>

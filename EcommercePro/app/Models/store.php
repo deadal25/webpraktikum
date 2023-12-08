@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+// use App\Models\Store;
+
+// namespace App;
+
 
 class store extends Model
 {
@@ -14,6 +18,12 @@ public function products()
 {
     return $this->hasMany(Product::class);
 }
+public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 
 }
+// $product = Product::with('store')->find($id);
+

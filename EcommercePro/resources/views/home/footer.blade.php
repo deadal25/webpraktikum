@@ -4,16 +4,16 @@
           <div class="col-md-4">
               <div class="full">
                  <div class="logo_footer">
-                   <a href="#"><img width="210" src="images/logo.png" alt="#" /></a>
+                   <a href="{{ url('/') }}"><img width="210" src="images/logo.png" alt="#" /></a>
                  </div>
                  <div class="information_f">
-                   <p><strong>ADDRESS:</strong> 28 White tower, Street Name New York City, USA</p>
-                   <p><strong>TELEPHONE:</strong> +91 987 654 3210</p>
-                   <p><strong>EMAIL:</strong> yourmain@gmail.com</p>
+                   <p><strong>ADDRESS:</strong> TAMMALANREA PERDOS</p>
+                   <p><strong>TELEPHONE:</strong> +62 823 4784 4670</p>
+                   <p><strong>EMAIL:</strong> alqad.ri2505@gmail.com</p>
                  </div>
               </div>
           </div>
-          <div class="col-md-8">
+          {{-- <div class="col-md-8">
              <div class="row">
              <div class="col-md-7">
                 <div class="row">
@@ -29,8 +29,8 @@
                       <li><a href="#">Contact</a></li>
                    </ul>
                 </div>
-             </div>
-             <div class="col-md-6">
+             </div> --}}
+             {{-- <div class="col-md-6">
                 <div class="widget_menu">
                    <h3>Account</h3>
                    <ul>
@@ -42,8 +42,8 @@
                       <li><a href="#">Widget</a></li>
                    </ul>
                 </div>
-             </div>
-                </div>
+             </div> --}}
+                {{-- </div>
              </div>     
              <div class="col-md-5">
                 <div class="widget_menu">
@@ -61,10 +61,10 @@
                          </fieldset>
                       </form>
                    </div>
-                </div>
-             </div>
-             </div>
-          </div>
+                </div> --}}
+             {{-- </div> --}}
+             {{-- </div> --}}
+          {{-- </div> --}}
        </div>
     </div>
  </footer>

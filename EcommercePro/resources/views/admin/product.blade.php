@@ -76,6 +76,11 @@
                         <input class="text_color" type="number" min="0" name="quantity" placeholder="Write a Quantity" required="">
 
                     </div>
+                    <div class="div_design">
+                        <label for="store_id" >ID toko</label>
+                        <input class="text_color" type="number" min="0" name="store_id" placeholder="Write a store" required="">
+                    </div>
+
                     {{-- <div class="div_design">
                         <label for="">Product Category :</label>
                         <select  class="text_color"  name="category" required="">

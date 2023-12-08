@@ -9,25 +9,95 @@ use App\Models\store;
 use App\Models\favorite;
 use App\Models\cart;
 use App\Models\order;
+use App\Models\User;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+// use Auth;
 use Illuminate\Support\Facades\Auth;
 
 class TokoController extends Controller
-{
+{ 
+    
     public function view_home(){
         $category=category::all();
 
         return view('toko.addproduct', compact('category'));
     }
+    // public function addproduct(Request $request){
+    //     try {
+    //         // Validasi data
+    //         $request->validate([
+    //             'title' => 'required',
+    //             'description' => 'required',
+    //             'price' => 'required|numeric',
+    //             'quantity' => 'required|numeric',
+    //             'discount_price' => 'numeric',
+    //             'category' => 'required',
+    //             'nama_store' => 'required',
+    //             'description_store' => 'required',
+    //             'address' => 'required',
+    //             'phone' => 'required',
+    //             // Add other validations as needed
+    //         ]);
+    
+    //         // Mulai transaksi
+    //         DB::beginTransaction();
+    
+    //         // Buat toko baru
+    //         $store = new Store([
+    //             'nama_store' => $request->nama_store,
+    //             'description_store' => $request->description_store,
+    //             'address' => $request->address,
+    //             'phone' => $request->phone,
+    //         ]);
+    //         $store->save();
+    
+    //         // Buat produk baru dan hubungkan dengan toko
+    //         $product = new Product([
+    //             'title' => $request->title,
+    //             'description' => $request->description,
+    //             'price' => $request->price,
+    //             'quantity' => $request->quantity,
+    //             'discount_price' => $request->discount_price,
+    //             'category' => $request->category,
+    //         ]);
+    
+    //         $store->products()->save($product);
+    
+    //         // Handle image upload (assuming $request->image is present)
+    //         $image = $request->image;
+    //         $imagename = time() . '.' . $image->getClientOriginalExtension();
+    //         $image->move('product', $imagename);
+    //         $product->image = $imagename;
+    
+    //         $product->save();
+    
+    //         // Commit transaksi
+    //         DB::commit();
+    
+    //         return redirect()->back()->with('message', 'Product Added Successfully');
+    //     } catch (\Exception $e) {
+    //         // Rollback transaksi jika terjadi kesalahan
+    //         DB::rollBack();
+    
+    //         Log::error("Error during product addition: " . $e->getMessage());
+    //         return redirect()->back()->with('error', 'An error occurred during product addition. Please try again.');
+    //     }
+    // }
+    
 
     public function addproduct(Request $request){
         $product = new product;
-        $store= new store;
+        $store = new store;
         $product->title=$request->title;
         $product->description=$request->description;
         $product->price=$request->price;
         $product->quantity=$request->quantity;
         $product->discount_price=$request->discount_price;
         $product->category=$request->category;
+
+        $product->store_id=$request->store_id;
         $store->nama_store=$request->nama_store;
         $store->description_store=$request->description_store;
 
@@ -39,6 +109,203 @@ class TokoController extends Controller
         $product->save();
         return redirect()->back()->with('message', 'Product Added Successfully');;
     }
+    // public function addproduct(Request $request){
+    //     $request->validate([
+    //         'title' => 'required',
+    //         'description' => 'required',
+    //         'price' => 'required|numeric',
+    //         'quantity' => 'required|numeric',
+    //         'discount_price' => 'numeric',
+    //         'category' => 'required',
+    //         'nama_store' => 'required',
+    //         'description_store' => 'required',
+    //         'address' => 'required', // Add this line for address validation
+    //         'phone' => 'required',   // Add this line for phone validation
+    //         // Add other validations as needed
+    //     ]);
+        
+    //     $product = new Product;
+    //     $store = new Store;
+    
+    //     $product->title = $request->title;
+    //     $product->description = $request->description;
+    //     $product->price = $request->price;
+    //     $product->quantity = $request->quantity;
+    //     $product->discount_price = $request->discount_price;
+    //     $product->category = $request->category;
+    
+    //     // Assuming there is a relationship between Product and Store
+    //     // and the foreign key is store_id in the products table
+    //     $store->nama_store = $request->nama_store;
+    //     $store->description_store = $request->description_store;
+    //     $store->address = $request->address;
+    //     $store->phone = $request->phone;
+    //     $store->save();
+    
+    //     $product->store()->associate($store); // Associate the product with the store
+    //     $product->save();
+    
+    //     // Handle image upload (assuming $request->image is present)
+    //     $image = $request->image;
+    //     $imagename = time() . '.' . $image->getClientOriginalExtension();
+    //     $image->move('product', $imagename);
+    //     $product->image = $imagename;
+        
+    //     $product->save();
+    
+    //     return redirect()->back()->with('message', 'Product Added Successfully');
+    // }
+    
+//     public function addproduct(Request $request)
+// {
+//     $validator = Validator::make($request->all(), [
+//         'nama_store' => 'required|string',
+//         'description_store' => 'required|string',
+//         'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+//         // Add other validation rules for your fields
+//     ]);
+
+//     if ($validator->fails()) {
+//         return redirect()->back()
+//             ->withErrors($validator)
+//             ->withInput($request->all());
+//     }
+
+//     $user = Auth::user();
+//     if (!$user) {
+//         // Pengguna tidak terotentikasi
+//         return redirect()->back()->with('error', 'Unauthorized access');
+//     }
+
+//     $store = new Store;
+//     $store->nama_store = $request->nama_store;
+//     $store->description_store = $request->description_store;
+
+//     $user->stores()->save($store);
+//     // dd($user);
+
+//     $product = new Product;
+//     $product->title = $request->title;
+//     $product->description = $request->description;
+//     $product->price = $request->price;
+//     $product->quantity = $request->quantity;
+//     $product->discount_price = $request->discount_price;
+//     $product->category = $request->category;
+
+//     $image = $request->image;
+//     $imagename = time() . '.' . $image->getClientOriginalExtension();
+//     $image->move('product', $imagename);
+//     $product->image = $imagename;
+
+//     $product->stores()->attach($store);
+//     $product->save();
+
+
+//     return redirect()->back()->with('message', 'Product Added Successfully');
+// }
+
+//     public function addproduct(Request $request)
+// {
+//     $validator = Validator::make($request->all(), [
+//         'nama_store' => 'required|string',
+//         'description_store' => 'required|string',
+//         'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+//         // Add other validation rules for your fields
+//     ]);
+    
+//     if ($validator->fails()) {
+//         return redirect()->back()
+//             ->withErrors($validator)
+//             ->withInput($request->all());
+//     }
+
+//     $user = Auth::user();
+//     if (!$user) {
+//         // Pengguna tidak terotentikasi
+//         return redirect()->back()->with('error', 'Unauthorized access');
+//     }
+//     $stores = $user->stores;
+//     $store = new Store;
+//     $store->nama_store = $request->nama_store;
+//     $store->description_store = $request->description_store;
+
+//     $user->stores()->save($store);
+//     $store->save();
+
+//     $product = new Product;
+//     $product->title = $request->title;
+//     $product->description = $request->description;
+//     $product->price = $request->price;
+//     $product->quantity = $request->quantity;
+//     $product->discount_price = $request->discount_price;
+//     $product->category = $request->category;
+
+//     $image = $request->image;
+//     $imagename = time() . '.' . $image->getClientOriginalExtension();
+//     $request->image->move('product', $imagename);
+//     $product->image = $imagename;
+
+//     $product->store()->associate($store);
+//     $product->save();
+
+//     return redirect()->back()->withErrors($validator)->withInput($request->all());
+
+
+//     return redirect()->back()->with('message', 'Product Added Successfully');
+// }
+
+//     public function addproduct(Request $request)
+// {
+//     $user = Auth::user();
+//     $store = new Store;
+//     $store->nama_store = $request->nama_store;
+//     $store->description_store = $request->description_store;
+
+//     // $store->user()->associate($user);
+//     $user->stores()->save($store);
+//     $store->save();
+
+//     $product = new Product;
+//     $product->title = $request->title;
+//     $product->description = $request->description;
+//     $product->price = $request->price;
+//     $product->quantity = $request->quantity;
+//     $product->discount_price = $request->discount_price;
+//     $product->category = $request->category;
+//     // $image=$request->image;
+//     $image=$request->image;
+//     $imagename = time().'.'.$image->getClientOriginalExtension();  
+//     $request->image->move('product', $imagename);
+//     $product->image = $imagename; // Assuming you have defined $imagename earlier
+
+    // Associate the product with the store
+//     $product->store()->associate($store);
+
+//     $product->save();
+
+//     return redirect()->back()->with('message', 'Product Added Successfully');
+// }
+
+    // public function addproduct(Request $request){
+    //     $product = new product;
+    //     $store= new store;
+    //     $product->title=$request->title;
+    //     $product->description=$request->description;
+    //     $product->price=$request->price;
+    //     $product->quantity=$request->quantity;
+    //     $product->discount_price=$request->discount_price;
+    //     $product->category=$request->category;
+    //     $store->nama_store=$request->nama_store;
+    //     $store->description_store=$request->description_store;
+
+    //     $image=$request->image;
+    //     $imagename = time().'.'.$image->getClientOriginalExtension();  
+    //     $request->image->move('product', $imagename);  
+    //     $product->image=$imagename;
+           
+    //     $product->save();
+    //     return redirect()->back()->with('message', 'Product Added Successfully');;
+    // }
     public function showproduct(Request $request){
         
         $data =product::all();
@@ -65,7 +332,7 @@ class TokoController extends Controller
         $category=category::all();
 
         // $data=new product;
-        $storeId=store::all();
+        // $storeId=store::all();
         
         $data->title=$request->title;
         
@@ -79,7 +346,7 @@ class TokoController extends Controller
         
         $data->quantity=$request->quantity;
         
-        $data->store_id = $storeId;
+        $data->store_id = $request->store_id;
 
         $image=$request->image;
 
@@ -274,7 +541,10 @@ public function productdetails(Request $request, $id)
     // Mendapatkan data produk dari database
     $product = product::find($id);
 
-    $store = $product->store;
+    $store = DB::table('products')
+        ->join('stores', 'products.store_id', '=', 'stores.id')
+        ->select('stores.nama_store','stores.image_store', 'stores.description_store')
+        ->first();
 
     // Mengembalikan tampilan dengan data produk dan data toko
     return view('toko.productdetails', compact('product', 'store'));
@@ -305,6 +575,24 @@ public function pesanan($id){
 
     return redirect()->back();
 
+}
+
+public function productnya(Request $request){
+        
+    $product =product::all();
+    // $store = store::find($id);
+
+    // $store =store::find($id);
+    
+    return view('toko.productnya', compact('product'));
+}
+public function product_searchtoko(Request $request){
+
+    $search_text=$request->search;
+
+    $product=product::where('title','LIKE',"%$search_text%")->orWhere('category','LIKE',"%$search_text%")->paginate(3);
+
+    return view('toko.halamantoko',compact('product'));
 }
     
     

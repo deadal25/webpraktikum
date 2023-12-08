@@ -12,7 +12,7 @@
       <meta name="description" content="" />
       <meta name="author" content="" />
       <link rel="shortcut icon" href="images/favicon.png" type="">
-      <title>Famms - Fashion HTML Template</title>
+      <title>ISEKAI STORE</title>
       <!-- bootstrap core css -->
       <link rel="stylesheet" type="text/css" href="home/css/bootstrap.css" />
       <!-- font awesome style -->
@@ -81,6 +81,11 @@
                       <x-label for="phone" value="{{ __('phone') }}" />
                       <x-input id="phone" class="block mt-1 w-full" type="number" name="phone" :value="old('phone')" required autofocus autocomplete="phone" />
                   </div>
+
+                  {{-- <div>
+                    <x-label for="usertype" value="{{ __('usertype') }}" />
+                    <x-input id="usertype" class="block mt-1 w-full" type="number" name="usertype" :value="old('usertype')" required autofocus autocomplete="usertype" />
+                </div> --}}
       
                   <div>
                       <x-label for="address" value="{{ __('address') }}" />
@@ -129,12 +134,12 @@
       {{-- @include('home.footer') --}}
       <!-- footer end -->
       <div class="cpy_">
-         <p class="mx-auto">© 2021 All Rights Reserved By <a href="https://html.design/">Free Html Templates</a><br>
-         
-            Distributed By <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
-         
-         </p>
-      </div>
+        <p class="mx-auto">© 2023 All Rights Reserved By Free Html Templates
+        
+           Distributed By AL QADRI
+        
+        </p>
+     </div>
       <!-- jQery -->
       <script src="home/js/jquery-3.4.1.min.js"></script>
       <!-- popper js -->

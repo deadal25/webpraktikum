@@ -55,10 +55,10 @@
                                         <img height="400px" width="300px" src="/product/{{ $product->image }}" >
                                         </td>
                                         <td>
-                                            <a class="btn btn-primary" href="{{ url('update_product', $product->id) }}">Edit</a>
+                                            <a class="btn btn-primary" href="{{ url('update_productadmin', $product->id) }}">Edit</a>
                                         </td>
                                         <td>
-                                            <a class="btn btn-danger" onclick="return confirm('Are yous Sure?')" href="{{ url('deleteproduct', $product->id) }}">Delete</a>
+                                            <a class="btn btn-danger" onclick="return confirm('Are yous Sure?')" href="{{ url('deleteproducttoko', $product->id) }}">Delete</a>
                                         </td>
                                     
                                     

@@ -77,7 +77,10 @@
                     <div class="div_design">
                         <label for="">Product Quantity</label>
                         <input class="text_color" type="number" min="0" name="quantity" placeholder="Write a Quantity" required="" value="{{ $data->quantity }}">
-
+                    </div>
+                    <div class="div_design">
+                        <label for="">ID Toko</label>
+                        <input class="text_color" type="number" min="0" name="store_id" placeholder="Write a store_id" required="" value="{{ $data->store_id }}">
                     </div>
                     {{-- <div class="div_design">
                         <label for="">Product Category :</label>

@@ -45,9 +45,9 @@ Route::post('/add_product', [AdminController::class, 'add_product']);
 Route::get('/show_product', [AdminController::class, 'show_product']);
 // Route::get('/showproduct', [AdminController::class, 'showproduct']);
 
-Route::get('/deleteproduct/{id}', [AdminController::class, 'deleteproduct']);
+Route::get('/deleteproducttoko/{id}', [AdminController::class, 'deleteproducttoko']);
 
-Route::get('/update_product/{id}', [AdminController::class, 'update_product']);
+Route::get('/update_productadmin/{id}', [AdminController::class, 'update_productadmin']);
 
 Route::post('/update_product_confirm/{id}', [AdminController::class, 'update_product_confirm']);
 
@@ -134,6 +134,9 @@ Route::post('/update_user_confirm/{id}', [AdminController::class, 'update_user_c
 
 Route::get('/deleteuser/{id}', [AdminController::class, 'deleteuser']);
 
+Route::get('/productnya', [TokoController::class, 'productnya']);
+
+Route::get('/product_searchtoko', [TokoController::class, 'product_searchtoko']);
 
 
 

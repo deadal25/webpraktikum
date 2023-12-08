@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\Cart;
 use App\Models\Favorite;
+use Illuminate\Support\Facades\DB;
 use App\Models\store;
 use App\Models\Order;
 use Illuminate\Support\Facades\Validator;
@@ -61,16 +62,29 @@ class HomeController extends Controller
         }
     }
     
-    public function product_details(Request $request, $id)
+//     public function product_details(Request $request, $id)
+//     {
+//     // Mendapatkan data produk dari database
+//     $product = product::find($id);
+
+//     // $product->product_title = Auth::store()->nama_store;
+//     // $product->store_id = Auth::store()->id;
+
+//     $store=store::all();
+//     // $product->product=$store->nama_store;
+//     // Mengembalikan tampilan dengan data produk dan data toko
+//     return view('home.product_details', compact('product', 'store'));
+// }
+public function product_details(Request $request, $id)
     {
     // Mendapatkan data produk dari database
     $product = product::find($id);
 
-    // $product->product_title = Auth::store()->nama_store;
-    // $product->store_id = Auth::store()->id;
+    $store = DB::table('products')
+        ->join('stores', 'products.store_id', '=', 'stores.id')
+        ->select('stores.nama_store')
+        ->first();
 
-    $store=store::all();
-    // $product->product=$store->nama_store;
     // Mengembalikan tampilan dengan data produk dan data toko
     return view('home.product_details', compact('product', 'store'));
 }
@@ -168,9 +182,10 @@ public function add_cart(Request $request, $id){
 public function calculateTotalPrice($price, $quantity) {
     return $price * $quantity;
 }
-// HomeController atau controller lainnya
-public function update_cart(Request $request, $id){
-    $cart = Cart::find($id);
+
+public function update_cart(Request $request, $id) {
+    // Find the cart item with the associated product loaded
+    $cart = Cart::with('product')->find($id);
 
     // Validasi jika produk tidak ditemukan pada cart, mungkin karena data yang tidak valid
     if (!$cart || !$cart->product) {
@@ -189,8 +204,11 @@ public function update_cart(Request $request, $id){
     // Update data di database
     $cart->quantity = $request->quantity;
 
+    // Access the associated product through the loaded relationship
+    $product = $cart->product;
+
     // Hitung total harga berdasarkan quantity yang baru
-    $newTotalPrice = $cart->product->discount_price ?? $cart->product->price;
+    $newTotalPrice = $product->discount_price ?? $product->price;
     $newTotalPrice *= $request->quantity;
 
     // Simpan total harga yang baru ke dalam database
@@ -199,6 +217,44 @@ public function update_cart(Request $request, $id){
 
     return redirect()->back()->with('message', 'Cart updated successfully');
 }
+
+
+// HomeController atau controller lainnya
+// public function update_cart(Request $request, $id){
+//     $cart = Cart::find($id);
+
+//     // // Validasi jika produk tidak ditemukan pada cart, mungkin karena data yang tidak valid
+//     // if (!$cart || !$cart->product) {
+//     //     dd($cart->product);
+//     //     return redirect()->back()->with('error', 'Invalid cart data');
+//     // }
+
+//     // Validasi input quantity
+//     $validator = Validator::make($request->all(), [
+//         'quantity' => 'required|integer|min:1',
+//     ]);
+
+//     if ($validator->fails()) {
+//         return redirect()->back()->withErrors($validator)->withInput();
+//     }
+
+//     // Update data di database
+//     $cart->quantity = $request->quantity;
+
+//     $product = Product::find($id);
+
+//     // Hitung total harga berdasarkan quantity yang baru
+//     // $newTotalPrice = $product->discount_price ?? $product->price;
+//     // $newTotalPrice *= $request->quantity;
+//     $newTotalPrice = $product->discount_price ?? $product->price;
+//     $newTotalPrice *= $request->quantity;
+
+//     // Simpan total harga yang baru ke dalam database
+//     $cart->price = $newTotalPrice;
+//     $cart->save();
+
+//     return redirect()->back()->with('message', 'Cart updated successfully');
+// }
 
 // public function update_cart(Request $request, $id){
 //     $cart = Cart::find($id);
@@ -518,6 +574,19 @@ public function update_cart(Request $request, $id){
         return redirect()->back();
 
     }
+
+    // public function increaseQuantity($rowId){
+    //   $product = Cart::get($rowId);
+    //   $qty= $product->qty + 1;
+    //   Cart::update($rowId,$qty);
+
+    // }
+    // public function decreaseQuantity($rowId){
+    //     $product = Cart::get($rowId);
+    //     $qty= $product->qty - 1;
+    //     Cart::update($rowId, $qty);
+  
+    //   }
     
     
 }

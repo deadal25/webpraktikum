@@ -1,7 +1,7 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-      <a class="sidebar-brand brand-logo" href="index.html"><img src="admin/assets/images/admin.svg" alt="logo" /></a>
-      <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="admin/assets/images/admin-logo.svg" alt="logo" /></a>
+      <a class="sidebar-brand brand-logo" href="{{ ('/redirect') }}"><img src="admin/assets/images/admin.svg" alt="logo" /></a>
+      <a class="sidebar-brand brand-logo-mini" href="{{('/redirect') }}"><img src="admin/assets/images/admin-logo.svg" alt="logo" /></a>
     </div>
     <ul class="nav">
       {{-- <li class="nav-item profile"> --}}
@@ -107,15 +107,15 @@
           <span class="menu-title">User</span>
         </a>
       </li>
-      <li class="nav-item menu-items">
+      {{-- <li class="nav-item menu-items">
         <a class="nav-link" href="pages/charts/chartjs.html">
           <span class="menu-icon">
             <i class="mdi mdi-chart-bar"></i>
           </span>
           <span class="menu-title">Charts</span>
         </a>
-      </li>
-      <li class="nav-item menu-items">
+      </li> --}}
+      {{-- <li class="nav-item menu-items">
         <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
           <span class="menu-icon">
             <i class="mdi mdi-security"></i>
@@ -132,14 +132,14 @@
             <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
           </ul>
         </div>
-      </li>
-      <li class="nav-item menu-items">
+      </li> --}}
+      {{-- <li class="nav-item menu-items">
         <a class="nav-link" href="http://www.bootstrapdash.com/demo/corona-free/jquery/documentation/documentation.html">
           <span class="menu-icon">
             <i class="mdi mdi-file-document-box"></i>
           </span>
           <span class="menu-title">Documentation</span>
         </a>
-      </li>
+      </li> --}}
     </ul>
   </nav>

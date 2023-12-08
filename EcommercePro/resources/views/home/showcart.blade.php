@@ -11,7 +11,7 @@
       <meta name="description" content="" />
       <meta name="author" content="" />
       <link rel="shortcut icon" href="images/favicon.png" type="">
-      <title>Famms - Fashion HTML Template</title>
+      <title>ISEKAI STORE</title>
       <!-- bootstrap core css -->
       <link rel="stylesheet" type="text/css" href="home/css/bootstrap.css" />
       <!-- font awesome style -->
@@ -162,6 +162,17 @@
                     <input type="number" name="quantity" value="{{ $cart->quantity }}" class="form-control quantity cart_update" min="1">
                     <button type="submit" class="btn btn-primary">Update Quantity</button>
                 </form>
+                {{-- <form action=""></form> --}}
+                {{-- <td class="text-center" data_title="quantity">
+                    <div class="detail-qty border radius m-auto">
+                        <a href="" class="qty-down" wire:click.prevent="decreaseQuantity('{{ $cart->rowId }}')" >
+                            <i class="fi-rs-angle-small-down"></i>
+                        </a>
+                        <span class="qty-val" >{{ $cart->qty }}</span>
+                        <a href="" class="qty-up" wire:click.prevent="increaseQuantity('{{ $cart->rowId }}')><i class="fi-rs-angle-small-up"></i></a>
+
+                    </div>
+                </td> --}}
                 
             </td>
             {{-- <td class="td_deg">{{ $cart->price }}</td> --}}
@@ -224,12 +235,12 @@
   
       <!-- footer end -->
       <div class="cpy_">
-         <p class="mx-auto">© 2021 All Rights Reserved By <a href="https://html.design/">Free Html Templates</a><br>
-         
-            Distributed By <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
-         
-         </p>
-      </div>
+        <p class="mx-auto">© 2023 All Rights Reserved By Free Html Templates
+        
+           Distributed By AL QADRI
+        
+        </p>
+     </div>
       <!-- jQery -->
       <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
